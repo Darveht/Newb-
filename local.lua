@@ -279,224 +279,241 @@ toggleCorner.Parent = adminToggle
 
 -- Funciones
 local function createArticleCard(articleData)
-	local card = Instance.new("Frame")
-	card.Size = UDim2.new(1, 0, 0, 120)
-	card.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	card.BorderSizePixel = 1
-	card.BorderColor3 = Color3.fromRGB(218, 220, 224)
+        local card = Instance.new("Frame")
+        card.Size = UDim2.new(1, 0, 0, 120)
+        card.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        card.BorderSizePixel = 1
+        card.BorderColor3 = Color3.fromRGB(218, 220, 224)
 
-	local cardCorner = Instance.new("UICorner")
-	cardCorner.CornerRadius = UDim.new(0, 8)
-	cardCorner.Parent = card
+        local cardCorner = Instance.new("UICorner")
+        cardCorner.CornerRadius = UDim.new(0, 8)
+        cardCorner.Parent = card
 
-	local title = Instance.new("TextLabel")
-	title.Size = UDim2.new(1, -20, 0, 30)
-	title.Position = UDim2.new(0, 10, 0, 10)
-	title.BackgroundTransparency = 1
-	title.Text = articleData.Title
-	title.Font = Enum.Font.GothamBold
-	title.TextSize = 18
-	title.TextColor3 = Color3.fromRGB(26, 13, 171)
-	title.TextXAlignment = Enum.TextXAlignment.Left
-	title.TextTruncate = Enum.TextTruncate.AtEnd
-	title.Parent = card
+        local title = Instance.new("TextLabel")
+        title.Size = UDim2.new(1, -20, 0, 30)
+        title.Position = UDim2.new(0, 10, 0, 10)
+        title.BackgroundTransparency = 1
+        title.Text = articleData.Title
+        title.Font = Enum.Font.GothamBold
+        title.TextSize = 18
+        title.TextColor3 = Color3.fromRGB(26, 13, 171)
+        title.TextXAlignment = Enum.TextXAlignment.Left
+        title.TextTruncate = Enum.TextTruncate.AtEnd
+        title.Parent = card
 
-	local preview = Instance.new("TextLabel")
-	preview.Size = UDim2.new(1, -20, 0, 40)
-	preview.Position = UDim2.new(0, 10, 0, 45)
-	preview.BackgroundTransparency = 1
-	preview.Text = string.sub(articleData.Content, 1, 150) .. "..."
-	preview.Font = Enum.Font.Gotham
-	preview.TextSize = 14
-	preview.TextColor3 = Color3.fromRGB(95, 99, 104)
-	preview.TextXAlignment = Enum.TextXAlignment.Left
-	preview.TextYAlignment = Enum.TextYAlignment.Top
-	preview.TextWrapped = true
-	preview.Parent = card
+        local preview = Instance.new("TextLabel")
+        preview.Size = UDim2.new(1, -20, 0, 40)
+        preview.Position = UDim2.new(0, 10, 0, 45)
+        preview.BackgroundTransparency = 1
+        local previewText = articleData.Content
+        if string.len(previewText) > 150 then
+                previewText = string.sub(previewText, 1, 150) .. "..."
+        end
+        preview.Text = previewText
+        preview.Font = Enum.Font.Gotham
+        preview.TextSize = 14
+        preview.TextColor3 = Color3.fromRGB(95, 99, 104)
+        preview.TextXAlignment = Enum.TextXAlignment.Left
+        preview.TextYAlignment = Enum.TextYAlignment.Top
+        preview.TextWrapped = true
+        preview.TextTruncate = Enum.TextTruncate.AtEnd
+        preview.Parent = card
 
-	local author = Instance.new("TextLabel")
-	author.Size = UDim2.new(0.5, -10, 0, 20)
-	author.Position = UDim2.new(0, 10, 1, -30)
-	author.BackgroundTransparency = 1
-	author.Text = "Por " .. articleData.Author
-	author.Font = Enum.Font.Gotham
-	author.TextSize = 12
-	author.TextColor3 = Color3.fromRGB(95, 99, 104)
-	author.TextXAlignment = Enum.TextXAlignment.Left
-	author.Parent = card
+        local author = Instance.new("TextLabel")
+        author.Size = UDim2.new(0.5, -10, 0, 20)
+        author.Position = UDim2.new(0, 10, 1, -30)
+        author.BackgroundTransparency = 1
+        author.Text = "Por " .. articleData.Author
+        author.Font = Enum.Font.Gotham
+        author.TextSize = 12
+        author.TextColor3 = Color3.fromRGB(95, 99, 104)
+        author.TextXAlignment = Enum.TextXAlignment.Left
+        author.TextTruncate = Enum.TextTruncate.AtEnd
+        author.Parent = card
 
-	local date = Instance.new("TextLabel")
-	date.Size = UDim2.new(0.5, -10, 0, 20)
-	date.Position = UDim2.new(0.5, 0, 1, -30)
-	date.BackgroundTransparency = 1
-	date.Text = articleData.Date
-	date.Font = Enum.Font.Gotham
-	date.TextSize = 12
-	date.TextColor3 = Color3.fromRGB(95, 99, 104)
-	date.TextXAlignment = Enum.TextXAlignment.Right
-	date.Parent = card
+        local date = Instance.new("TextLabel")
+        date.Size = UDim2.new(0.5, -10, 0, 20)
+        date.Position = UDim2.new(0.5, 0, 1, -30)
+        date.BackgroundTransparency = 1
+        date.Text = articleData.Date
+        date.Font = Enum.Font.Gotham
+        date.TextSize = 12
+        date.TextColor3 = Color3.fromRGB(95, 99, 104)
+        date.TextXAlignment = Enum.TextXAlignment.Right
+        date.Parent = card
 
-	local openButton = Instance.new("TextButton")
-	openButton.Size = UDim2.new(1, 0, 1, 0)
-	openButton.BackgroundTransparency = 1
-	openButton.Text = ""
-	openButton.Parent = card
+        local openButton = Instance.new("TextButton")
+        openButton.Size = UDim2.new(1, 0, 1, 0)
+        openButton.BackgroundTransparency = 1
+        openButton.Text = ""
+        openButton.Parent = card
 
-	openButton.MouseButton1Click:Connect(function()
-		showArticle(articleData)
-	end)
+        openButton.MouseButton1Click:Connect(function()
+                showArticle(articleData)
+        end)
 
-	return card
+        return card
 end
 
 function showArticle(articleData)
-	mainFrame.Visible = false
-	articleFrame.Visible = true
+        mainFrame.Visible = false
+        articleFrame.Visible = true
 
-	articleScroll:ClearAllChildren()
+        articleScroll:ClearAllChildren()
 
-	local layout = Instance.new("UIListLayout")
-	layout.SortOrder = Enum.SortOrder.LayoutOrder
-	layout.Padding = UDim.new(0, 20)
-	layout.Parent = articleScroll
+        local layout = Instance.new("UIListLayout")
+        layout.SortOrder = Enum.SortOrder.LayoutOrder
+        layout.Padding = UDim.new(0, 20)
+        layout.Parent = articleScroll
 
-	local titleLabel = Instance.new("TextLabel")
-	titleLabel.Size = UDim2.new(1, 0, 0, 50)
-	titleLabel.BackgroundTransparency = 1
-	titleLabel.Text = articleData.Title
-	titleLabel.Font = Enum.Font.GothamBold
-	titleLabel.TextSize = 32
-	titleLabel.TextColor3 = Color3.fromRGB(32, 33, 36)
-	titleLabel.TextWrapped = true
-	titleLabel.TextXAlignment = Enum.TextXAlignment.Left
-	titleLabel.AutomaticSize = Enum.AutomaticSize.Y
-	titleLabel.Parent = articleScroll
+        local titleLabel = Instance.new("TextLabel")
+        titleLabel.Size = UDim2.new(1, -40, 0, 50)
+        titleLabel.Position = UDim2.new(0, 20, 0, 0)
+        titleLabel.BackgroundTransparency = 1
+        titleLabel.Text = articleData.Title
+        titleLabel.Font = Enum.Font.GothamBold
+        titleLabel.TextSize = 32
+        titleLabel.TextColor3 = Color3.fromRGB(32, 33, 36)
+        titleLabel.TextWrapped = true
+        titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+        titleLabel.TextYAlignment = Enum.TextYAlignment.Top
+        titleLabel.AutomaticSize = Enum.AutomaticSize.Y
+        titleLabel.Parent = articleScroll
 
-	local authorContainer = Instance.new("Frame")
-	authorContainer.Size = UDim2.new(1, 0, 0, 60)
-	authorContainer.BackgroundTransparency = 1
-	authorContainer.Parent = articleScroll
+        local authorContainer = Instance.new("Frame")
+        authorContainer.Size = UDim2.new(1, -40, 0, 60)
+        authorContainer.Position = UDim2.new(0, 20, 0, 0)
+        authorContainer.BackgroundTransparency = 1
+        authorContainer.Parent = articleScroll
 
-	local authorImage = Instance.new("ImageLabel")
-	authorImage.Size = UDim2.new(0, 50, 0, 50)
-	authorImage.Position = UDim2.new(0, 0, 0, 5)
-	authorImage.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
-	authorImage.Image = articleData.AuthorImage
-	authorImage.Parent = authorContainer
+        local authorImage = Instance.new("ImageLabel")
+        authorImage.Size = UDim2.new(0, 50, 0, 50)
+        authorImage.Position = UDim2.new(0, 0, 0, 5)
+        authorImage.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+        authorImage.Image = articleData.AuthorImage
+        authorImage.Parent = authorContainer
 
-	local imgCorner = Instance.new("UICorner")
-	imgCorner.CornerRadius = UDim.new(1, 0)
-	imgCorner.Parent = authorImage
+        local imgCorner = Instance.new("UICorner")
+        imgCorner.CornerRadius = UDim.new(1, 0)
+        imgCorner.Parent = authorImage
 
-	local authorInfo = Instance.new("TextLabel")
-	authorInfo.Size = UDim2.new(1, -70, 0, 50)
-	authorInfo.Position = UDim2.new(0, 65, 0, 5)
-	authorInfo.BackgroundTransparency = 1
-	authorInfo.Text = "Escrito por " .. articleData.Author .. "\n" .. articleData.Date
-	authorInfo.Font = Enum.Font.Gotham
-	authorInfo.TextSize = 14
-	authorInfo.TextColor3 = Color3.fromRGB(95, 99, 104)
-	authorInfo.TextXAlignment = Enum.TextXAlignment.Left
-	authorInfo.TextYAlignment = Enum.TextYAlignment.Center
-	authorInfo.Parent = authorContainer
+        local authorInfo = Instance.new("TextLabel")
+        authorInfo.Size = UDim2.new(1, -70, 0, 50)
+        authorInfo.Position = UDim2.new(0, 65, 0, 5)
+        authorInfo.BackgroundTransparency = 1
+        authorInfo.Text = "Escrito por " .. articleData.Author .. "\n" .. articleData.Date
+        authorInfo.Font = Enum.Font.Gotham
+        authorInfo.TextSize = 14
+        authorInfo.TextColor3 = Color3.fromRGB(95, 99, 104)
+        authorInfo.TextXAlignment = Enum.TextXAlignment.Left
+        authorInfo.TextYAlignment = Enum.TextYAlignment.Center
+        authorInfo.Parent = authorContainer
 
-	local divider = Instance.new("Frame")
-	divider.Size = UDim2.new(1, 0, 0, 2)
-	divider.BackgroundColor3 = Color3.fromRGB(218, 220, 224)
-	divider.BorderSizePixel = 0
-	divider.Parent = articleScroll
+        local divider = Instance.new("Frame")
+        divider.Size = UDim2.new(1, -40, 0, 2)
+        divider.Position = UDim2.new(0, 20, 0, 0)
+        divider.BackgroundColor3 = Color3.fromRGB(218, 220, 224)
+        divider.BorderSizePixel = 0
+        divider.Parent = articleScroll
 
-	local contentLabel = Instance.new("TextLabel")
-	contentLabel.Size = UDim2.new(1, 0, 0, 100)
-	contentLabel.BackgroundTransparency = 1
-	contentLabel.Text = articleData.Content
-	contentLabel.Font = Enum.Font.Gotham
-	contentLabel.TextSize = 16
-	contentLabel.TextColor3 = Color3.fromRGB(32, 33, 36)
-	contentLabel.TextWrapped = true
-	contentLabel.TextXAlignment = Enum.TextXAlignment.Left
-	contentLabel.TextYAlignment = Enum.TextYAlignment.Top
-	contentLabel.AutomaticSize = Enum.AutomaticSize.Y
-	contentLabel.Parent = articleScroll
+        local contentLabel = Instance.new("TextLabel")
+        contentLabel.Size = UDim2.new(1, -40, 0, 100)
+        contentLabel.Position = UDim2.new(0, 20, 0, 0)
+        contentLabel.BackgroundTransparency = 1
+        contentLabel.Text = articleData.Content
+        contentLabel.Font = Enum.Font.Gotham
+        contentLabel.TextSize = 16
+        contentLabel.TextColor3 = Color3.fromRGB(32, 33, 36)
+        contentLabel.TextWrapped = true
+        contentLabel.TextXAlignment = Enum.TextXAlignment.Left
+        contentLabel.TextYAlignment = Enum.TextYAlignment.Top
+        contentLabel.AutomaticSize = Enum.AutomaticSize.Y
+        contentLabel.Parent = articleScroll
 
-	task.wait()
-	articleScroll.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 40)
+        task.wait(0.1)
+        layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+                articleScroll.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 60)
+        end)
+        articleScroll.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 60)
 end
 
 local function searchArticlesFunc()
-	local searchTerm = searchBox.Text
-	resultsContainer:ClearAllChildren()
+        local searchTerm = searchBox.Text
+        resultsContainer:ClearAllChildren()
 
-	local layout = Instance.new("UIListLayout")
-	layout.SortOrder = Enum.SortOrder.LayoutOrder
-	layout.Padding = UDim.new(0, 15)
-	layout.Parent = resultsContainer
+        local layout = Instance.new("UIListLayout")
+        layout.SortOrder = Enum.SortOrder.LayoutOrder
+        layout.Padding = UDim.new(0, 15)
+        layout.Parent = resultsContainer
 
-	local results = SearchArticles:InvokeServer(searchTerm)
+        local results = SearchArticles:InvokeServer(searchTerm)
 
-	if #results == 0 then
-		local noResults = Instance.new("TextLabel")
-		noResults.Size = UDim2.new(1, 0, 0, 100)
-		noResults.BackgroundTransparency = 1
-		noResults.Text = "No se encontraron resultados"
-		noResults.Font = Enum.Font.Gotham
-		noResults.TextSize = 18
-		noResults.TextColor3 = Color3.fromRGB(95, 99, 104)
-		noResults.Parent = resultsContainer
-	else
-		for _, article in ipairs(results) do
-			local card = createArticleCard(article)
-			card.Parent = resultsContainer
-		end
-	end
+        if #results == 0 then
+                local noResults = Instance.new("TextLabel")
+                noResults.Size = UDim2.new(1, 0, 0, 100)
+                noResults.BackgroundTransparency = 1
+                noResults.Text = "No se encontraron resultados"
+                noResults.Font = Enum.Font.Gotham
+                noResults.TextSize = 18
+                noResults.TextColor3 = Color3.fromRGB(95, 99, 104)
+                noResults.Parent = resultsContainer
+        else
+                for _, article in ipairs(results) do
+                        local card = createArticleCard(article)
+                        card.Parent = resultsContainer
+                end
+        end
 
-	task.wait()
-	resultsContainer.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 20)
+        task.wait(0.1)
+        layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+                resultsContainer.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 30)
+        end)
+        resultsContainer.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 30)
 
 end
 
 -- Eventos
 searchButton.MouseButton1Click:Connect(searchArticlesFunc)
 searchBox.FocusLost:Connect(function(enterPressed)
-	if enterPressed then
-		searchArticlesFunc()
-	end
+        if enterPressed then
+                searchArticlesFunc()
+        end
 end)
 
 backButton.MouseButton1Click:Connect(function()
-	articleFrame.Visible = false
-	mainFrame.Visible = true
+        articleFrame.Visible = false
+        mainFrame.Visible = true
 end)
 
 adminToggle.MouseButton1Click:Connect(function()
-	adminPanel.Visible = not adminPanel.Visible
+        adminPanel.Visible = not adminPanel.Visible
 end)
 
 publishButton.MouseButton1Click:Connect(function()
-	if titleInput.Text ~= "" and contentInput.Text ~= "" then
-		local articleData = {
-			Title = titleInput.Text,
-			Content = contentInput.Text,
-			Date = dateInput.Text ~= "" and dateInput.Text or nil
-		}
+        if titleInput.Text ~= "" and contentInput.Text ~= "" then
+                local articleData = {
+                        Title = titleInput.Text,
+                        Content = contentInput.Text,
+                        Date = dateInput.Text ~= "" and dateInput.Text or nil
+                }
 
-		PublishArticle:FireServer(articleData)
+                PublishArticle:FireServer(articleData)
 
-		titleInput.Text = ""
-		contentInput.Text = ""
-		dateInput.Text = ""
+                titleInput.Text = ""
+                contentInput.Text = ""
+                dateInput.Text = ""
 
-		adminPanel.Visible = false
+                adminPanel.Visible = false
 
-		wait(0.5)
-		searchArticlesFunc()
-	end
+                wait(0.5)
+                searchArticlesFunc()
+        end
 end)
 
 -- Verificar si el jugador es admin
 player:WaitForChild("IsAdmin")
 if player.IsAdmin.Value then
-	adminToggle.Visible = true
+        adminToggle.Visible = true
 end
 
 -- Cargar artículos iniciales
